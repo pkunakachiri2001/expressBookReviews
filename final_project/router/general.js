@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios'); // <-- MOVED TO TOP
 let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
@@ -99,9 +100,6 @@ public_users.get('/review/:isbn', function (req, res) {
   return res.status(404).json({message: "Book not found"});
 });
 
-module.exports.general = public_users;
-const axios = require('axios');
-
 // Task 10: Get all books using async/await with Axios
 public_users.get('/async-books', async function (req, res) {
     try {
@@ -144,3 +142,5 @@ public_users.get('/async-title/:title', async function (req, res) {
         return res.status(500).json({message: "Error fetching by title"});
     }
 });
+
+module.exports.general = public_users; // <-- MOVED TO VERY BOTTOM
